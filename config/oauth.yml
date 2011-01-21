@@ -1,5 +1,5 @@
 yammer:
-  consumer_key: XXXX
-  consumer_secret: XXXX
-  token_key: XXXX
-  token_secret: XXXX
+  app_key: XXXX
+  app_secret: XXXX
+  user_token: XXXX
+  user_secret: XXXX
