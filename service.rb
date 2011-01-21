@@ -17,7 +17,7 @@ post '/yammer' do
   description = description_node ? description_node.content : nil
   project_id_node = doc.xpath("/activity/project_id").first
   project_id = project_id_node ? project_id_node.content : nil
-  story_id_node = doc.xpath("/activity/stories/story/id")
+  story_id_node = doc.xpath("/activity/stories/story/id").first
   story_id = story_id_node ? story_id_node.content : nil
 
   if description !~ /\s(edited|added)\s/
