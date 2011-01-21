@@ -19,7 +19,7 @@ post '/yammer' do
   story_url = story_url_node ? story_url_node.content : nil
 
   if description !~ /\s(edited|added)\s/
-    config = File.open('config/oauth.yml','r') do |f|
+    config = File.open("#{File.dirname(__FILE__)}/config/oauth.yml",'r') do |f|
       YAML.load(f)
     end
     yammer_config = config["yammer"]
