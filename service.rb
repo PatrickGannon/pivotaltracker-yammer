@@ -15,8 +15,10 @@ post '/yammer' do
   doc = Nokogiri::XML(body)
   description_node = doc.xpath("/activity/description").first
   description = description_node ? description_node.content : nil
-  story_url_node = doc.xpath("/activity/stories/story/url").first
-  story_url = story_url_node ? story_url_node.content : nil
+  project_id_node = doc.xpath("/activity/project_id")
+  project_id = project_id_node ? project_id_node.content : nil
+  story_id_node = doc.xpath("/activity/stories/story/id")
+  story_id = story_id_node ? story_id_node.content : nil
 
   if description !~ /\s(edited|added)\s/
     config = File.open("#{File.dirname(__FILE__)}/config/oauth.yml",'r') do |f|
@@ -30,6 +32,7 @@ post '/yammer' do
     params = {:oauth_token => yammer_config['user_token'],
       :oauth_token_secret => yammer_config['user_secret']}
     token = OAuth::ConsumerToken.from_hash(consumer, params)
+    story_url = "https://www.pivotaltracker.com/projects/#{project_id}?story_id=#{story_id}"
     message = "#{description}\n#{story_url}"
     token.request :post, "/api/v1/messages/?body=#{URI.escape(message)}"
 
