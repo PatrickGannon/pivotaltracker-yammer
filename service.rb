@@ -20,7 +20,7 @@ post '/yammer' do
   story_id_node = doc.xpath("/activity/stories/story/id").first
   story_id = story_id_node ? story_id_node.content : nil
 
-  if description =~ /\sadded comment\s/ description !~ /\s(edited|added)\s/
+  if description =~ /\sadded comment:\s/ || description !~ /\s(edited|added)\s/
     config = File.open("#{File.dirname(__FILE__)}/config/oauth.yml",'r') do |f|
       YAML.load(f)
     end
