@@ -34,7 +34,7 @@ post '/yammer' do
     token = OAuth::ConsumerToken.from_hash(consumer, params)
     story_url = "https://www.pivotaltracker.com/projects/#{project_id}?story_id=#{story_id}"
     message = "#{description}\n#{story_url}"
-    escaped_message = URI.escape(message, ':/?=" ')
+    escaped_message = URI.escape(message, ":/?=\" \n")
     token.request :post, "/api/v1/messages/?body=#{escaped_message}"
 
     "Posted: #{description}"
